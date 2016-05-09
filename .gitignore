@@ -6,3 +6,7 @@
 
 poster.pdf
 _minted*/
+
+graphics/plot*.pdf
+graphics/domains*.pdf
+graphics/rate_plot.pdf

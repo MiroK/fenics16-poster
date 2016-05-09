@@ -1,0 +1,41 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{bm,amsmath,amssymb}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\usetikzlibrary{plotmarks, calc}
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  xlabel=$h$,
+  ylabel=$\norm{w-I_h w}_{0, \Omega}$,
+  xmode=log,
+  ymode=log,
+  legend cell align=left,
+  legend style={at={(0.975, 0.2)}}
+  ]
+% 2d
+\addplot[color=blue, mark=o] table [x=h2d, y=e2d]{rate_data.txt};
+\label{rate_2d};
+\addlegendentry{$d=2$}
+% 3d
+\addplot[color=red, mark=o] table [x=h3d, y=e3d]{rate_data.txt};
+\label{rate_3d};
+\addlegendentry{$d=3$}
+
+% lets add rates
+\pgfplotstableread{./rate_data.txt}\mydata;
+\addplot [color=black, mark=none, dashed] table[
+  x expr=\thisrowno{0}, 
+  y expr=\thisrowno{0}
+  ] {\mydata};
+\addplot [color=black, mark=none, dotted] table[
+  x expr=\thisrowno{0}, 
+  y expr=\thisrowno{0}^1.5
+  ] {\mydata};
+\node[] at (axis cs: 3E-3, 3E-4) {$h^{\tfrac{3}{2}}$};
+\node[] at (axis cs: 3E-3, 5E-3) {$h$};
+\end{axis}
+\end{tikzpicture}
+\end{document}
