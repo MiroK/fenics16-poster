@@ -1,0 +1,8 @@
+*.sw*
+*.aux
+*.log
+*_latexmk
+*.fls
+
+poster.pdf
+_minted*/
