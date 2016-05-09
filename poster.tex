@@ -94,7 +94,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \node[anchor=north]
 (motif title)
-at ($(current bounding box.north)+(0cm,-10cm)$)
+at ($(current bounding box.north)+(0cm,-9.5cm)$)
 {
 \begin{minipage}{0.6\textwidth}
 \centering
@@ -110,24 +110,13 @@ at ($(current bounding box.north)+(0cm,-10cm)$)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Clement
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\node[draw=none, anchor=north west]
-(motif text)
-at ( $(motif title.south west)+(1cm,0)$ )
-{
-};
-%
-\node[anchor=north west]
-(clm title)
-at ($(motif text.south west)-(1cm,0cm)$){
-};
-%
 \node[draw=elblue, 
       fill=eyellow!20!white,
       line width=1mm, anchor=north west,
       rounded corners=4mm, inner sep=1cm,
       minimum height=20cm]
 (clm)
-at ( $(clm title.south west)+(1cm,0)$ )
+at ( $(current bounding box.north west) + (1cm, -15cm)$ )
 {\begin{minipage}{40cm}   % 70 cm take 40
 \vspace{1.0cm}
 \footnotesize
@@ -252,493 +241,82 @@ at ($ (clm.north west)+(4cm, 0cm) $)
 {
   \ffmfamily\textcolor{edblue}{\clm interpolation}
 };
-% 
-% %%%% applications %%%%
-% \node[anchor=north east]
-% (applications title)
-% at ($(motif text.south west)+(115.2cm,+0cm)$)
-% {\bfseries\ffmfamily\Large\underline{Application examples}};
-% 
-% %%%% sensitivity analysis %%%%
-% \node[draw=simula, line width=1mm, anchor=north west,
-%       rounded corners=4mm, inner sep=1cm,
-%       fill=simula!10!white, minimum height=25cm]
-% (sensitivity)
-% at ($(howitworks.north east)+(2cm,0)$)
-% {\begin{minipage}{57cm}
-% \begin{minipage}{0.6\textwidth}
-% \footnotesize
-% \vspace{1cm}
-% Consider the time dependent heat equation
-%     \begin{align*}
-%          \frac{\partial u}{\partial t} - \nu \nabla^{2} u= 0
-%              \quad & \textrm{in\phantom{r} } \Omega \times (0, T), \\
-%             u = g  \quad & \textrm{for } \Omega \times \{0\}.
-%     \end{align*}
-% Here $\Omega$ is the Gray's Klein bottle, a closed 2D manifold embedded in 3D,
-%     $T$ is the final time, $u$ is the
-%     unknown temperature, $\nu$ is the thermal diffusivity, and $g$ is the initial
-%     temperature.
-% 
-% The goal is to compute the sensitivity of the norm of temperature at the final time
-%     \begin{equation*}
-%         J(u) = \int_\Omega u(t=T)^2
-%     \end{equation*}
-% with respect to the initial temperature,  that is $\textrm{d} J / \textrm{d} g$.
-% 
-% \includegraphics[width=0.3\textwidth]{images/klein_bottle-init}
-% \includegraphics[width=0.3\textwidth]{images/klein_bottle-final}
-% \includegraphics[width=0.3\textwidth]{images/klein_bottle-sensitivity}
-% \begin{minipage}{0.3\textwidth}
-%     \centering
-%     Initial temperature
-% \end{minipage}
-% \quad
-% \begin{minipage}{0.3\textwidth}
-%     \centering
-%     Final temperature
-% \end{minipage}
-% \quad
-% \begin{minipage}{0.3\textwidth}
-%     \centering
-%     Sensitivity
-% \end{minipage}
-% \end{minipage}
-% \hfill
-% \begin{minipage}{0.35\textwidth}
-% \footnotesize
-%     \begin{tcolorbox}
-%         \begin{minted}{python}
-% from dolfin import *
-% from dolfin_adjoint import *
-% 
-% # Solve the forward system
-% F = u*v*dx - u_old*v*dx +
-%     dt*nu*inner(grad(v),grad(u))*dx
-% while t <= T:
-%     t += dt
-%     solve(F == 0, u)
-% 
-% # Apply dolfin-adjoint
-% m = Control(g)
-% J = u**2*dx*dt[T]
-% dJdm = compute_gradient(J, m)
-% H = hessian(J, m)
-%     \end{minted}
-% \end{tcolorbox}
-% \textbf{$\vartriangle$ \\Code}: Implementation excerpt (the code including the
-% complete forward model has $37$ lines)
-% 
-% \end{minipage}
-% 
-% \end{minipage}};
-% 
-% \node[anchor=west, rounded corners=3mm, fill=simula]
-% (sensitivity title)
-% at ($ (sensitivity.north west)!3cm!(sensitivity.north east) $)
-% {\ffmfamily Sensitivity analysis};
-% 
-% %%%% PDE-constrained optimization analysis %%%%
-% \node[draw=simula, line width=1mm, anchor=north west,
-%       rounded corners=4mm, inner sep=1cm,
-%       fill=simula!10!white, minimum height=22cm]
-% (opti)
-% at ($(sensitivity.south west)-(0, 2cm)$)
-% {\begin{minipage}{57cm}
-%         \vspace{1cm}
-% \begin{minipage}{0.5\textwidth}
-%     \footnotesize
-%      This topology optimization example minimizes the compliance
-%     \begin{align*}
-%         \int_{\Omega} fT + \alpha \int_{\Omega} \nabla a \cdot
-%         \nabla a,
-%     \end{align*}
-%      subject to the Poisson equation with
-%      mixed Dirichlet--Neumann
-%      conditions
-%     \begin{align*}
-%            -\mathrm{div}(k(a) \nabla T) &= f  \qquad \mathrm{in} \ \Omega,           \\
-%                              T &= 0  \qquad \mathrm{on} \ \partial \Omega_D,  \\
-%                k(a) \nabla T &= 0  \qquad \mathrm{on} \ \partial \Omega_N,
-%     \end{align*}
-%      and additional control constraints
-%     \begin{align*}
-%               \int_{\Omega} a \le V \textrm{ and }
-%               0 \le a(x) &\le 1  \qquad \forall x \in \Omega.
-%     \end{align*}
-% Here $\Omega$ is the unit square, $T$ is the temperature, $a$ is the control
-% ($a(x) = 1$ means material, $a(x) = 0$ means no material), $f$ is a source term, $k(a)$ is the Solid Isotropic Material with Penalisation
-% parameterization, $\alpha$ is a regularization term, and $V$ is the volume
-% bound on the control.
-% Physically, the problem is to find the material distribution $a$ that minimizes the integral of the temperature for a limited amount of conducting material.
-% \end{minipage}
-% \hfill
-% \begin{minipage}{0.48\textwidth}
-%     \begin{tcolorbox}
-%     \footnotesize
-% \begin{minted}{python}
-% from dolfin import *
-% from dolfin_adjoint import *
-% # ...
-% J = f*T*dx + alpha*inner(grad(a),grad(a))*dx
-% m = Control(a)
-% rf = ReducedFunctional(J, m)
-% minimize(rf, method="SLSQP", bounds=...)
-% \end{minted}
-%     \end{tcolorbox}
-% \vspace{5mm}
-% \includegraphics[width=0.44\textwidth]{images/poisson-topology_2d}
-% \hfill
-% \begin{minipage}[b]{0.5\textwidth}
-% \footnotesize
-% \textbf{$\vartriangle$ \\Code}: Implementation excerpt (the full code uses
-% the IPOPT optimization package and has $56$ lines) \\
-% \textbf{$\triangleleft$ Figure}: Optimal material distribution $a$ for a unit square domain and $f=10^{-2}$
-% \vspace{1.4cm}
-% \end{minipage}
-% \end{minipage}
-% 
-% 
-% \end{minipage}};
-% 
-% \node[anchor=west, rounded corners=3mm, fill=simula]
-% (opti title)
-% at ($ (opti.north west)!3cm!(opti.north east) $)
-% {\ffmfamily PDE-constrained optimization};
-% 
-% %%%% Generalized stability analysis %%%%
-% \node[draw=simula, line width=1mm, anchor=north west,
-%       rounded corners=4mm, inner sep=1cm,
-%       fill=simula!10!white, minimum height=25cm]
-% (stab)
-% at ($(opti.south west)-(0, 2cm)$)
-% {\begin{minipage}{57cm}
-% \footnotesize
-% \begin{minipage}{0.6\textwidth}
-% \vspace{1cm}
-%  This example performs a generalized stability analysis to find the
-%  perturbations to an initial condition that grow the most over some finite
-%  time. The governing equations are the two-dimensional
-%  vorticity-streamfunction formulation of the time-dependent Navier--Stokes
-%  equations, coupled to two advection equations for temperature and salinity:
-% \begin{align*}
-%   \frac{\partial \zeta}{\partial t} + \nabla^{\perp} \psi \cdot \nabla \zeta &= \frac{\textrm{Ra}}{\textrm{Pr}}\left(\frac{\partial T}{\partial x} - \frac{1}{R_{\rho}^0} \frac{\partial S}{\partial x}\right) + \nabla^2 \zeta, \\
-%   \frac{\partial T}{\partial t} + \nabla^{\perp} \psi \cdot \nabla T &= \frac{1}{\textrm{Pr}} \nabla^2 T, \\
-%   \frac{\partial S}{\partial t} + \nabla^{\perp} \psi \cdot \nabla S &= \frac{1}{\textrm{Sc}} \nabla^2 S, \\
-%   \nabla^2 \psi &= \zeta.
-% \end{align*}
-%  $\zeta$ is the vorticity, $\psi$ is the streamfunction,
-%  $T$ is the temperature, $S$ is the salinity, and $\textrm{Ra}$,
-%  $\textrm{Sc}$, $\textrm{Pr}$ and ${R_{\rho}^0}$ are parameters.
-%  The configuration consists of two well-mixed layers (i.e., of homogeneous
-%  temperature and salinity) separated by an interface. The instability is
-%  activated by a sinusoidal perturbation to the initial
-%  salinity field.
-% 
-%  \vspace{1.0cm}
-%     \begin{tcolorbox}
-% \begin{minted}{python}
-% from dolfin import *
-% from dolfin_adjoint import *
-% # ...
-% gst = compute_gst("InitialSalinity", "FinalSalinity", nsv=2)
-% \end{minted}
-%     \end{tcolorbox}
-% \end{minipage}
-% \hspace{0.5cm}
-% \begin{minipage}{0.38\textwidth}
-% \includegraphics[width=0.48\textwidth]{images/salt-fingering}
-% \includegraphics[width=0.48\textwidth]{images/salt-fingering-gst-initial}
-% \begin{minipage}{0.48\textwidth}
-%     \centering
-% Initial salinity
-% \end{minipage}
-% \begin{minipage}{0.48\textwidth}
-%     \centering
-%     \vspace{0.3cm}
-% Leading initial salinity perturbation
-%     \vspace{0.3cm}
-% \end{minipage}
-% \begin{minipage}{0.5\textwidth}
-% \begin{minipage}{0.9\textwidth}
-%     \vspace{3cm}
-% \footnotesize
-% \textbf{$\triangleleft$ Code}: Implementation excerpt (the full code uses
-% SLEPc and has $144$ lines)
-% \end{minipage}
-% \end{minipage}
-% \begin{minipage}[t]{0.48\textwidth}
-% \includegraphics[width=\textwidth]{images/salt-fingering-gst-final}
-%     \centering
-% Leading final salinity perturbation
-% \end{minipage}
-% \end{minipage}
-% \end{minipage}
-% };
-% 
-% \node[anchor=west, rounded corners=3mm, fill=simula]
-% (stab title)
-% at ($ (stab.north west)!3cm!(stab.north east) $)
-% {\ffmfamily Generalized stability analysis};
-% 
-% %%%% performance %%%%
-% \node[draw=simula, line width=1mm, anchor=north west,
-%       rounded corners=4mm, inner sep=1cm,
-%       minimum height=1cm]
-% (performance)
-% at ($(howitworks.south west)+(0,-2cm)$)
-% {\begin{minipage}{51cm}
-% \footnotesize
-% \vspace{1cm}
-% dolfin-adjoint runs naturally in parallel, and inherits the
-% scalability and code optimizations of FEniCS.
-% To verify this, we benchmarked the sensitivity analysis and generalized stability
-% application examples.
-% \vspace{1cm}
-% 
-% \begin{minipage}{0.5\textwidth}
-% \begin{table}
-%     \caption*{Sensitivity analysis example}
-% \scriptsize
-% \centering
-% \begin{tabular}{@{}Tccccccccc}
-% \toprule
-% CPUs & 1 & 2 & 4  & Optimal\\
-% Forward runtime (s) & 40.3 & 19.6 & 13.2 \\
-% Adjoint runtime (s) & 39.1 & 19.3 & 12.5 \\
-% %Gradient runtime (s) & 43.1 & 22.0 & 14.3 \\
-% Adjoint/Forward ratio & 0.97 & 0.99 & 0.95 & \textcolor{red}{1.00} \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% \end{minipage}
-% \begin{minipage}{0.5\textwidth}
-% \begin{table}
-%     \caption*{Generalized stability example}
-% \scriptsize
-% \centering
-% \begin{tabular}{@{}Tccccccccc}
-% \toprule
-% CPUs & 1 & 2  & Optimal\\
-% Forward runtime (s) & 92.4 & 55.0 \\
-% Adjoint runtime (s) & 41.4 & 25.9 \\
-% Adjoint/Forward ratio & 0.45 & 0.47 & \textcolor{red}{0.5}\\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% \end{minipage}
-% \vspace{0.5cm}
-% 
-% \textbf{Tables:} {The sensitivity analysis example is linear, while
-% the generalized stability analysis example is nonlinear and converges on average
-% in 2 Newton-iteration per timestep. Hence the adjoint model is expected to be
-% twice as fast as the forward model.}
-% 
-% \end{minipage}};
-% 
-% \node[anchor=east, rounded corners=3mm, fill=simula]
-% (performance title)
-% at ($ (performance.north east)!3cm!(performance.north west) $)
-% {\ffmfamily Performance};
-% dolfin-adjoint supports
-% 
-% 
-% %%%% Checkpointing %%%%
-% \node[draw=simula, line width=1mm, anchor=north west,
-%       rounded corners=4mm, inner sep=1cm,
-%       minimum height=18cm]
-% (checkpointing)
-% at ($(performance.south west)+(0,-2cm)$)
-% {\begin{minipage}{51cm}
-% \begin{minipage}{0.57\textwidth}
-% \footnotesize
-% The adjoint equations depend on the forward solutions. However,
-% storing the entire forward trajectory is infeasible for
-% large, time-dependent simulations. In this case, dolfin-adjoint can
-% employ a binomial checkpointing
-% strategy via the revolve library. When activated, dolfin-adjoint automatically saves
-% state checkpoints and uses them to recompute missing forward states to trade
-% off memory requirements and computational effort.
-% This allows for solving adjoint equations even for large-scale simulations.
-% For instance, $390$ checkpoints allow
-% simulations with $10^7$ time-steps at a cost of a $3 \times$ slow-down.
-% 
-% %\begin{table}
-% %\scriptsize
-% %\centering
-% %\begin{tabular}{@{}Tccccccccc}
-% %\toprule
-% %Number of timesteps & $10^2$ & $10^3$ & $10^4$ & $10^5$ & $10^5$ & $10^7$ \\
-% %Required checkpoints & 7 & 17 & 38 & 83 & 180 & 390 \\
-% %\bottomrule
-% %\end{tabular}
-% %\end{table}
-% %Checkpointing allows us to compute adjoint
-% %solutions even for large-scale simulations.
-% %
-% \end{minipage}
-% \hfill
-% \begin{minipage}{0.4\textwidth}
-% \begin{center}
-%     \begin{figure}
-%         \centering
-% \vspace{0.4cm}
-% \includegraphics[height=10cm]{images/revolve}
-% \caption*{\textbf{Figure:} Visualisation of the optimal checkpointing strategy with 10 time levels
-% and 3 checkpoints}
-%     \end{figure}
-% \end{center}
-% \end{minipage}
-% 
-% \footnotesize
-% \vspace{0.8cm}
-% To benchmark the checkpoint implementation, we used the sensitivity example
-% to compare the additional computational cost of checkpointing with a
-% store-all strategy in dolfin-adjoint:
-% 
-% \begin{table}
-%     \caption*{Slow-down factor with 11 timesteps and varying memory
-%     checkpoints}
-% \scriptsize
-% \centering
-% \begin{tabular}{@{}Tcccccccc}
-% \toprule
-% Theoretical adjoint to forward runtime ratio & $5.00$ & $2.18$ &
-% $1.63$ & $1.45$ & $1.00$ \\
-% Observed adjoint to forward runtime ratio & 5.07 & 2.26 & 1.73 & 1.53 &
-% 0.90 \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-% 
-% \end{minipage}};
-% 
-% \node[anchor=east, rounded corners=3mm, fill=simula]
-% (checkpointing title)
-% at ($ (checkpointing.north east)!3cm!(checkpointing.north west) $)
-% {\ffmfamily Checkpointing};
-% 
-% %%%% how to get started %%%%
-% \node[anchor=north west]
-% (howtogetstarted title)
-% at ($(checkpointing.south west)-(1cm,1cm)$)
-% {\bfseries\ffmfamily\Large\underline{How to get started}};
-% 
-% \node[draw=none, anchor=north west]
-% (howtogetstarted)
-% at ( $(howtogetstarted title.south west)+(1cm,0)$ )
-% {
-% \vspace{1cm}
-% \begin{minipage}{20cm}
-%     %\includegraphics[height=3cm]{logodolfinadjoint}
-%         \normalsize
-%         http://dolfin-adjoint.org
-% \end{minipage}
-% \begin{minipage}{30cm}
-%         \footnotesize
-%         Contains an introduction to adjoints, documentation, tutorials and
-%         installation instructions for Linux (with Ubuntu packages) and MacOS X.
-% \end{minipage}
-% };
-% 
-% %%%% references %%%%
-% %\node[anchor=north west]
-% %(reference title)
-% %at ($(stab.south west)-(0cm,2cm)$)
-% %{\bfseries\ffmfamily\Large\underline{References}};
-% %
-% %\node[draw=none, anchor=north west]
-% %(reference text)
-% %at ( $(reference title.south west)+(1cm,0)$ )
-% %{\begin{minipage}{37cm}
-% %\footnotesize
-% %S.~Pezzuto, D.~Ambrosi, A.~Quarteroni.
-% %An orthotropic active--strain model for myocardium mechanics and its numerical
-% %approximation.
-% %\textit{European Journal of Mechanics--A/Solids}, 2014.
-% %
-% %\medskip
-% %G.~Holzapfel, R.~Ogden.
-% %Constitutive modelling of passive myocardium: a structurally based framework
-% %for material characterization.
-% %\textit{Philosophical Transactions of the Royal Society A: Mathematical,
-% %Physical and Engineering Sciences}, 2009.
-% %\end{minipage}};
-% 
-% %%%% software %%%%
-% \node[anchor=north west]
-% (software title)
-% %at ($(stab.south west)-(1cm,0cm)$)
-% at ($(howtogetstarted.south west)-(1cm,1cm)$)
-% {\bfseries\ffmfamily\Large\underline{Downloads}};
-% 
-% \node[draw=none, anchor=north west]
-% (software text)
-% at ( $(software title.south west)+(0cm,0)$ )
-% {\begin{minipage}{60cm}
-% \footnotesize
-% \begin{minipage}[t]{3cm}
-% \vskip0pt
-% \includegraphics[height=3cm]{qrposter}
-% \end{minipage}
-% \begin{minipage}[t]{5cm}
-% \vskip0pt
-% This poster \\PDF format
-% \end{minipage}
-% \hspace{3cm}
-% \begin{minipage}[t]{3cm}
-% \vskip0pt
-% \includegraphics[height=3cm]{qrreferences}
-% \end{minipage}
-% \begin{minipage}[t]{12cm}
-% \vskip0pt
-% References \\
-% dolfin-adjoint.org/citing
-% \end{minipage}
-% \vspace{1cm}
-% \begin{minipage}[t]{3cm}
-% \vskip0pt
-% \includegraphics[height=3cm]{qrdolfinadjointsource}
-% \end{minipage}
-% \begin{minipage}[t]{12cm}
-% \vskip0pt
-% Source code \\
-% bitbucket.org/dolfin-adjoint
-% \end{minipage}
-% \hspace{2cm}
-% \begin{minipage}[t]{3cm}
-% \vskip0pt
-% \includegraphics[height=3cm]{qrfenics}
-% \end{minipage}
-% \begin{minipage}[t]{5cm}
-% \vskip0pt
-% \includegraphics[height=3cm]{logofenics}
-% \end{minipage}
-% \hspace{3cm}
-% 
-% \end{minipage}};
-% 
-% % Acknowledgments
-% %\node[anchor=west]
-% %at ( $(software text.south west)+(0cm,0cm)$ )
-% %{
-% %    \footnotesize
-% %    This work is supported by NERC and EPSRC in the UK, and the
-% %    Center for Biomedical Computing in Norway.
-% %    %\includegraphics[height=4cm,clip]{nerc-logo}
-% %    %\includegraphics[height=4cm,clip]{epsrc}
-% %};
-% \node[anchor=east]
-% at ( $(stab.south east)+(0cm,-1.5cm)$ )
-% {
-%     \includegraphics[height=2.2cm,clip]{CBClogoII}
-%     \hspace{0.3cm}
-%     \includegraphics[height=2.2cm,clip]{epsrc}
-%     \hspace{0.3cm}
-%     \includegraphics[height=2.2cm,clip]{nerc-logo}
-% };
 
-%%%% footer %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured grid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\node[draw=elblue, 
+      fill=eyellow!20!white,
+      line width=1mm, anchor=north east,
+      rounded corners=4mm, inner sep=1cm,
+      minimum height=38cm, minimum width=25cm]
+(grid)
+at ( $(current bounding box.north east) + (-1cm, -15cm)$ )
+{\begin{minipage}{25cm}   % 70 cm take 40
+\vspace{1.0cm}
+\footnotesize
+%
+\footnotesize
+\end{minipage}};
+% 
+\node[anchor=west, rounded corners=3mm, fill=eyellow]
+(grid title)
+at ($ (grid.north west)+(4cm, 0cm) $)
+{
+  \ffmfamily\textcolor{edblue}{Structured grid}
+};
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Lagrangian particles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\node[draw=elblue, 
+      fill=eyellow!20!white,
+      line width=1mm, anchor=north,
+      rounded corners=4mm, inner sep=1cm,
+      minimum height=39.5cm, minimum width=25cm]
+(lp)
+at ( $(grid.south)+(0cm, -2cm)$ )
+{\begin{minipage}{25cm}   % 70 cm take 40
+\vspace{1.0cm}
+\footnotesize
+%
+\footnotesize
+\end{minipage}};
+% 
+\node[anchor=west, rounded corners=3mm, fill=eyellow]
+(lp title)
+at ($ (lp.north west)+(4cm, 0cm) $)
+{
+  \ffmfamily\textcolor{edblue}{Lagrangian particles}
+};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Travis integration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\node[draw=elblue, 
+      fill=eyellow!20!white,
+      line width=1mm, anchor=north,
+      rounded corners=4mm, inner sep=1cm,
+      minimum height=15.25cm, minimum width=42cm]
+(travis)
+at ( $(clm.south)+(0cm, -2cm)$ )
+{\begin{minipage}{40cm}   % 70 cm take 40
+\vspace{1.0cm}
+\footnotesize
+%
+\footnotesize
+\end{minipage}};
+% 
+\node[anchor=west, rounded corners=3mm, fill=eyellow]
+(travis title)
+at ($ (travis.north west)+(4cm, 0cm) $)
+{
+  \ffmfamily\textcolor{edblue}{Development cycle}
+};
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begingroup
 \draw[fill=eyellow, draw=none] { 
   ($(current bounding box.south west)+(0cm, 43.5mm)$) --
