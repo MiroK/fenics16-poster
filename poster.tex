@@ -99,10 +99,9 @@ at ($(current bounding box.north)+(0cm,-9.5cm)$)
 \begin{minipage}{0.6\textwidth}
 \centering
 {
-  fenicstools is a collection of extensions to FEniCS library with particular
-  focus on efficient visualization and postprocessing of results of large
-  scale
-  computations.
+  fenicstools is a collection of extensions to the FEniCS library with 
+  particular focus on efficient visualization and postprocessing of large 
+  scale computations.
 }
 \end{minipage}
 };
@@ -139,7 +138,7 @@ at ( $(current bounding box.north west) + (1cm, -15cm)$ )
   \[
     \norm{u - I_h u}_{m, K} \leq C h^{1-m}_K\norm{u}_{1, \tilde{w}_K}
   \]
-  for $u\in H^1$, $m=0, 1$ and $K$ and element of triangulation.
+  for $u\in H^1$, $m=0, 1$ and $K$ an element of triangulation.
 }
 \end{minipage}
 \hfill
@@ -265,7 +264,7 @@ be done efficiently with \emph{Probes/StatisticsProbes} classes.
 \begin{minted}{python}
 from dolfin import *
 from numpy import array
-from fenicstools import *
+from fenicstools import Probes
 mesh = UnitSquareMesh(10, 10)
 V = FunctionSpace(mesh, "CG", 1)
 x = array([[0.1, 0.1], [0.5, 0.5]])
@@ -275,7 +274,7 @@ probes(u)   # evaluate probes once
 print probes.array() # [ 0.01  0.25]
 \end{minted}
 \end{tcolorbox}
-\textbf{$\vartriangle$ Code}:Probe two locations defined by the `x` array
+\textbf{$\vartriangle$ Code}:Probe two locations defined by the \emph{x} array
 \end{minipage}
 \begin{minipage}{0.58\textwidth}
 \textbf{$\triangleright$ Figure}:{
@@ -316,21 +315,21 @@ at ( $(grid.south)+(0cm, -2cm)$ )
 \vspace{1.0cm}
 \footnotesize
  Lagrangian particle tracking has been implemented to enable tracking of 
- passive scalars throughout a flow domain. Particles are created with the 
- \emph{LagrangianParticles} class
+ passive scalars throughout a flow domain.
  \vskip 0.2in
 \begin{minipage}{\textwidth}
 \footnotesize
 \begin{tcolorbox}
 \begin{minted}{python}
- lp = LagrangianParticles(V)
- particle_positions = RandomCircle(...)
- lp.add_particles(particle_positions)
- # inside fluid integrator:
-   lp.step(u, dt=dt) 
+lp = fenicstools.LagrangianParticles(V)
+particle_positions = RandomCircle(...)
+lp.add_particles(particle_positions)
+# inside fluid integrator:
+    lp.step(u, dt=dt) 
 \end{minted}
 \end{tcolorbox}
-\textbf{$\vartriangle$ Code}: Create an instance of the LagrangianParticles 
+\textbf{$\vartriangle$ Code}: Create an instance of the 
+\emph{LagrangianParticles} 
 class and advect particles inside fluid advector loop.
 \end{minipage} 
  
