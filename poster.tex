@@ -96,8 +96,8 @@ at ($(current bounding box.north)+(0cm,-9.5cm)$)
 \begin{minipage}{0.6\textwidth}
 \centering
 {
-  fenicstools is a collection of extensions to the FEniCS library with particular
-  focus on efficient visualization and postprocessing of results of large
+  fenicstools is a collection of extensions to the FEniCS library with 
+  particular focus on efficient visualization and postprocessing of large 
   scale computations.
 }
 \end{minipage}
@@ -282,8 +282,7 @@ print probes.array() # [ 0.01  0.25]
 The \emph{StructuredGrid} class allows you to set probes in a 2$d$ slice 
 through a 3$d$ (or 2$d$) geometry - or it can be used to set probes in a 3$d$ box for 
 some interesting part of the simulated geometry. The slice may be stored as VTK 
-files and viewed, e.g., in Paraview.
-}
+  files and viewed, e.g., in Paraview.}
 \end{minipage}
 \hfill
 \begin{minipage}{0.4\textwidth}
@@ -316,21 +315,20 @@ at ( $(grid.south)+(0cm, -2cm)$ )
 \vspace{0.5cm}
 \footnotesize
  Lagrangian particle tracking has been implemented to enable tracking of 
- passive scalars throughout a flow domain. 
- %
-\vspace{1cm}
+ passive scalars throughout a flow domain.
+  \vspace{1cm}
 %\begin{minipage}{\textwidth}
 \footnotesize
 \begin{tcolorbox}
 \begin{minted}{python}
- lp = fenicstools.LagrangianParticles(V)
- particle_positions = RandomCircle(...)
- lp.add_particles(particle_positions)
- lp.step(u, dt=dt)  # Time integration
+lp = fenicstools.LagrangianParticles(V)
+particle_positions = RandomCircle(...)
+lp.add_particles(particle_positions)
+lp.step(u, dt=dt)  # Time integration
 \end{minted}
 \end{tcolorbox}
-  \textbf{$\vartriangle$ Code}: Create an instance of the
-  \emph{LagrangianParticles} 
+\textbf{$\vartriangle$ Code}: Create an instance of the 
+\emph{LagrangianParticles} 
 class and advect particles inside fluid advection loop.
 %\end{minipage} 
  
@@ -344,7 +342,7 @@ where $\boldsymbol{u}$ is the velocity vector of the fluid and
  \textbf{$\triangledown$ Figure:} {The \emph{LagrangianParticles} class has 
  been used to study drug delivery and mixing in a cerebrospinal fluid flow. 
  Here particles have been used since the drug has such low diffusivity that 
- regular  FEM schemes are unstable.}
+ regular FEM schemes are unstable.}
 \vskip 0.5in
 \begin{center}
 \includegraphics{./graphics/csf.png}
@@ -376,9 +374,9 @@ at ( $(clm.south)+(0cm, -2cm)$ )
 \begin{minipage}{0.66\textwidth}
 fenicstools is developed using Travis Continuous Integration and Anaconda 
 Cloud. With Travis CI all tests are automatically executed in an Ubuntu environment 
-on travis-ci.org whenever there is a new commit to origin/master, or if someone 
-creates a pull request. A tailored Anaconda build of a recent FEniCS version is
-  used in a MiniConda environment and tests start within minutes. 
+on travis-ci.org for each new commit or pull request to origin/master. A tailored 
+Anaconda build of a recent FEniCS version is then used in a MiniConda environment 
+and tests start within minutes. 
 
 \vspace{1cm}
 \begin{tcolorbox}
@@ -441,6 +439,13 @@ at ( $(current bounding box.south east)+(-1cm, 26.75mm)$ )
 {
     \includegraphics[height=3.0cm,trim=0 0 0 0, clip]{graphics/cbclogo}
 };
+  % QR Code for poster
+\node[anchor=center]
+at ( $(current bounding box.south )+(-4cm, 26.75mm)$ )
+{
+    \includegraphics[height=3.5cm]{graphics/qr}
+};
+  % QR code for extras
 \endgroup
 
 \end{tikzpicture}
