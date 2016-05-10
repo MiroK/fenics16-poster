@@ -115,7 +115,7 @@ at ($(current bounding box.north)+(0cm,-9.5cm)$)
 (clm)
 at ( $(current bounding box.north west) + (1cm, -15cm)$ )
 {\begin{minipage}{40cm}   % 70 cm take 40
-\vspace{1.0cm}
+\vspace{0.5cm}
 \footnotesize
   Evaluating quantities derived from primary unknowns, e.g. strain from
   displacement, is a frequent part of computational loops. Such quantities often
@@ -252,13 +252,13 @@ at ($ (clm.north west)+(4cm, 0cm) $)
 (grid)
 at ( $(current bounding box.north east) + (-1cm, -15cm)$ )
 {\begin{minipage}{22cm}   % 70 cm take 40
-\vspace{1.0cm}
+\vspace{0.5cm}
 \footnotesize
-A turbulent flow simulation often requires setting a Probe at a certain 
+A turbulent flow simulation often requires setting a probe at a certain 
 location inside the flow, where regular samplings are made over time. This can 
 be done efficiently with \emph{Probes/StatisticsProbes} classes. 
-
-\begin{minipage}{\textwidth}
+\vspace{1.0cm}
+%\begin{minipage}{\textwidth}
 \footnotesize
 \begin{tcolorbox}
 \begin{minted}{python}
@@ -274,15 +274,16 @@ probes(u)   # evaluate probes once
 print probes.array() # [ 0.01  0.25]
 \end{minted}
 \end{tcolorbox}
-\textbf{$\vartriangle$ Code}:Probe two locations defined by the `x` array
-\end{minipage}
+\textbf{$\vartriangle$ Code}: Probe two locations defined by the array.
+%\end{minipage}
+
+\vspace{1.0cm}
 \begin{minipage}{0.58\textwidth}
 \textbf{$\triangleright$ Figure}:{
-The \emph{StructuredGrid} class allows you to set probes in a 2D slice 
-through a 3D (or 2D) geometry - or it can be used to set probes in a 3D box for 
+The \emph{StructuredGrid} class allows you to set probes in a 2$d$ slice 
+through a 3$d$ (or 2$d$) geometry - or it can be used to set probes in a 3$d$ box for 
 some interesting part of the simulated geometry. The slice may be stored as VTK 
 files and viewed, e.g., in Paraview.
-	
 }
 \end{minipage}
 \hfill
@@ -313,26 +314,26 @@ at ($ (grid.north west)+(4cm, 0cm) $)
 (lp)
 at ( $(grid.south)+(0cm, -2cm)$ )
 {\begin{minipage}{22cm}   % 70 cm take 40
-\vspace{1.0cm}
+\vspace{0.5cm}
 \footnotesize
  Lagrangian particle tracking has been implemented to enable tracking of 
  passive scalars throughout a flow domain. Particles are created with the 
- \emph{LagrangianParticles} class
- \vskip 0.2in
-\begin{minipage}{\textwidth}
+ \emph{LagrangianParticles} class.
+%
+\vspace{1cm}
+%\begin{minipage}{\textwidth}
 \footnotesize
 \begin{tcolorbox}
 \begin{minted}{python}
  lp = LagrangianParticles(V)
  particle_positions = RandomCircle(...)
  lp.add_particles(particle_positions)
- # inside fluid integrator:
-   lp.step(u, dt=dt) 
+ lp.step(u, dt=dt)  # Time integration
 \end{minted}
 \end{tcolorbox}
 \textbf{$\vartriangle$ Code}: Create an instance of the LagrangianParticles 
 class and advect particles inside fluid advector loop.
-\end{minipage} 
+%\end{minipage} 
  
 The particles are advected according to
  \begin{equation*}
@@ -370,6 +371,7 @@ at ($ (lp.north west)+(4cm, 0cm) $)
 (travis)
 at ( $(clm.south)+(0cm, -2cm)$ )
 {\begin{minipage}{40cm}   % 70 cm take 40
+\vspace{0.5cm}
 \footnotesize
 %
 \begin{minipage}{0.66\textwidth}
@@ -392,9 +394,9 @@ conda install fenics=1.7.0 pyvtk h5py=2.6.0
 \begin{minipage}{0.33\textwidth}
 %\begin{figure}
 \begin{center}
-  \fbox{\includegraphics[height=6cm]{./graphics/travislogo}}\\
+  {\includegraphics[height=6cm]{./graphics/travislogo}}\\
   \vspace{1cm}
-  \fbox{\includegraphics[height=6cm]{./graphics/anacondalogo}}
+  {\includegraphics[height=6cm]{./graphics/anacondalogo}}
 \end{center}
 %\end{figure}
 %

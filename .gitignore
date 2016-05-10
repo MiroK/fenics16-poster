@@ -4,7 +4,6 @@
 *_latexmk
 *.fls
 
-poster.pdf
 _minted*/
 
 graphics/plot*.pdf
