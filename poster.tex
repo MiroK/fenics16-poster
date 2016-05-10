@@ -19,6 +19,7 @@
 \usepackage{tcolorbox}
 \usepackage{wrapfig}
 \usepackage{multirow}
+\usepackage{graphicx}
 
 \newcommand{\clm}{Cl\'{e}ment }
 \newcommand{\norm}[1]{\lVert#1\rVert}
@@ -369,17 +370,16 @@ at ($ (lp.north west)+(4cm, 0cm) $)
 (travis)
 at ( $(clm.south)+(0cm, -2cm)$ )
 {\begin{minipage}{40cm}   % 70 cm take 40
-\vspace{1.0cm}
 \footnotesize
 %
 \begin{minipage}{0.66\textwidth}
-Fenicstools is developed using Travis Continuous Integration and Anaconda 
-Cloud. With Travis CI 
-all tests are automatically executed in an Ubuntu environment on travis-ci.org 
-whenever there is a new push to origin/master, or if someone creates a pull 
-requests. A tailored Anaconda Fenics version is used in a MiniConda environment 
-for fast integration. 
+fenicstools is developed using Travis Continuous Integration and Anaconda 
+Cloud. With Travis CI all tests are automatically executed in an Ubuntu environment 
+on travis-ci.org whenever there is a new commit to origin/master, or if someone 
+creates a pull request. A tailored Anaconda FEniCS version is used in a MiniConda 
+environment for fast integration. 
 
+\vspace{1cm}
 \begin{tcolorbox}
 \begin{minted}{python}
 conda config --add channels mikaem/label/travis
@@ -390,12 +390,16 @@ conda install fenics=1.7.0 pyvtk h5py=2.6.0
 \end{minipage}
 \hfill
 \begin{minipage}{0.33\textwidth}
+%\begin{figure}
 \begin{center}
-\includegraphics[height=7cm]{./graphics/mascot.png} 
-\includegraphics[height=7cm]{./graphics/Anaconda_Logo.png}
+  \fbox{\includegraphics[height=6cm]{./graphics/travislogo}}\\
+  \vspace{1cm}
+  \fbox{\includegraphics[height=6cm]{./graphics/anacondalogo}}
 \end{center}
+%\end{figure}
+%
 \end{minipage}
-
+%
 \footnotesize
 \end{minipage}};
 % 
