@@ -71,7 +71,7 @@
 
    \bigskip
    {\color{edblue}
-     \textbf{\underline{M.~Mortensen}, M.~Kuchta}
+     \textbf{M.~Mortensen and M.~Kuchta}
 
    \vskip-5mm\footnotesize
    \texttt{mikaem@math.uio.no/mirok@math.uio.no}}
@@ -281,9 +281,8 @@ print probes.array() # [ 0.01  0.25]
 \textbf{$\triangleright$ Figure}:{
 The \emph{StructuredGrid} class allows you to set probes in a 2D slice 
 through a 3D (or 2D) geometry - or it can be used to set probes in a 3D box for 
-some interesting part of the simulated geometry. The slice may be stored as VTK 
-files and viewed, e.g., in Paraview.
-	
+some interesting part of the simulated geometry. The slices may be stored as 
+VTK files and viewed, e.g., in Paraview.
 }
 \end{minipage}
 \hfill
@@ -379,8 +378,8 @@ Fenicstools is developed using Travis Continuous Integration and Anaconda
 Cloud. With Travis CI 
 all tests are automatically executed in an Ubuntu environment on travis-ci.org 
 whenever there is a new push to origin/master, or if someone creates a pull 
-requests. A tailored Anaconda Fenics version is used in a MiniConda environment 
-for fast integration. 
+requests. A tailored Anaconda build of a recent Fenics version is then used in 
+a MiniConda environment and tests start within minutes.
 
 \begin{tcolorbox}
 \begin{minted}{python}
