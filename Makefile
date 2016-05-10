@@ -6,6 +6,14 @@ qrfenicstools.pdf: qrfenicstools.tex
 	latexmk -pdflatex=lualatex -pdf $<
 	mv qrfenicstools.pdf graphics
 
+qrposter.pdf: qrposter.tex
+	latexmk -pdflatex=lualatex -pdf $<
+	mv qrposter.pdf graphics
+
+qrextras.pdf: qrextras.tex
+	latexmk -pdflatex=lualatex -pdf $<
+	mv qrextras.pdf graphics
+
 domains.pdf: domains.tex
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
 	mv domains.pdf graphics
@@ -26,7 +34,7 @@ rate_plot.pdf: rate_plot.tex rate_data.txt
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
 	mv rate_plot.pdf graphics
 
-poster.pdf: poster.tex qrfenicstools.pdf domains.pdf plot_Ih.pdf plot_Ih_clement.pdf rate_plot.pdf
+poster.pdf: poster.tex qrfenicstools.pdf qrposter.pdf qrextras.pdf domains.pdf plot_Ih.pdf plot_Ih_clement.pdf rate_plot.pdf
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
 
 extras.pdf: extras.tex

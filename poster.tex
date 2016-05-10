@@ -440,14 +440,18 @@ at ( $(current bounding box.south east)+(-1cm, 26.75mm)$ )
     \includegraphics[height=3.0cm,trim=0 0 0 0, clip]{graphics/cbclogo}
 };
   % QR Code for poster
-\node[anchor=center]
-at ( $(current bounding box.south )+(-4cm, 26.75mm)$ )
-{
-    \includegraphics[height=3.5cm]{graphics/qr}
+\node[anchor=center] (qr1) at ($(current bounding box.south)+(-4cm, 21.75mm)$ ){
+    \includegraphics[height=36.5mm]{graphics/qrposter}
 };
-  % QR code for extras
-\endgroup
+\node[anchor=south east]  at ($(qr1.west)+(0.75cm, 0.5cm)$) {\footnotesize{Poster}};
 
+  % QR Code for extras
+\node[anchor=center] (qr2) at ($(current bounding box.south)+(+4cm, 21.75mm)$ ){
+    \includegraphics[height=36.5mm]{graphics/qrextras}
+};
+\node[anchor=north west]  at ($(qr2.east)+(-0.75cm, -0.5cm)$) {\footnotesize{Extras}};
+
+\endgroup
 \end{tikzpicture}
 
 \end{document}
