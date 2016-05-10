@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-all: poster.pdf
+all: poster.pdf extras.pdf
 
 qrfenicstools.pdf: qrfenicstools.tex
 	latexmk -pdflatex=lualatex -pdf $<
@@ -27,6 +27,9 @@ rate_plot.pdf: rate_plot.tex rate_data.txt
 	mv rate_plot.pdf graphics
 
 poster.pdf: poster.tex qrfenicstools.pdf domains.pdf plot_Ih.pdf plot_Ih_clement.pdf rate_plot.pdf
+	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
+
+extras.pdf: extras.tex
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
 
 view: 

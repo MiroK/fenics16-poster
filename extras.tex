@@ -1,0 +1,68 @@
+\documentclass[tikz,border=0cm]{standalone}
+\usepackage{type1cm}
+\usepackage{fp}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadows}
+
+\usepackage{fetamont}
+\usepackage{cmbright}
+
+\usepackage{bm,amsmath,amssymb}
+\usepackage{soul}
+\usepackage{multirow}
+
+\newcommand{\clm}{Cl\'{e}ment }
+\newcommand{\norm}[1]{\lVert#1\rVert}
+
+\edef\myfontscale{1.0}
+
+\definecolor{edblue}{RGB}{4, 80, 124}
+\definecolor{eyellow}{RGB}{248, 176, 23}
+\definecolor{elblue}{RGB}{55, 172, 195}
+
+\input{rescalefonts}
+
+\usepackage[a4paper, margin=1in]{geometry}
+
+\begin{document}
+
+\begin{tikzpicture}[x=21cm, y=29.7cm]
+\fill[white, use as bounding box] (0, 0) rectangle (1, 1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begingroup
+\node[inner sep=1cm, 
+      fill=eyellow,
+      anchor=north, 
+      draw=elblue, line width=3.5mm]
+      (title)
+      at ($(current bounding box.north)$)
+  {\begin{minipage}{0.88\textwidth}
+   \begin{center}
+   {\ffmfamily\bfseries\color{black}
+   {\LARGE fenicstools} \\[0.4ex]
+   {\LARGE smart add-ons for FEniCS}}
+
+   \bigskip
+   {\color{edblue}
+     \textbf{\underline{M.~Mortensen}, M.~Kuchta}
+
+   \vskip-5mm\footnotesize
+   \texttt{mikaem@math.uio.no}}
+
+   \end{center}
+  \end{minipage}};
+
+  \node[anchor=west] (foo) at ($(current bounding box.north west)+(7cm, -4.6cm)$)
+  {
+    \includegraphics[height=7cm]{graphics/fenicslogo}
+  };
+  \node[anchor=east] (foo) at ($(current bounding box.north east)+(-7cm, -4.6cm)$)
+  {
+    \includegraphics[height=7cm]{graphics/qrfenicstools}
+  };
+\endgroup
+\end{tikzpicture}
+\end{document}
