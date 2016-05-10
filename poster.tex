@@ -24,14 +24,10 @@
 \newcommand{\norm}[1]{\lVert#1\rVert}
 
 \edef\myfontscale{1.7}
-\definecolor{simula}{RGB}{245,130,32}
-\definecolor{amaranth}{rgb}{0.9, 0.17, 0.31}
-\definecolor{amber}{rgb}{1.0, 0.75, 0.0}
 
 \definecolor{edblue}{RGB}{4, 80, 124}
 \definecolor{eyellow}{RGB}{248, 176, 23}
 \definecolor{elblue}{RGB}{55, 172, 195}
-
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
 
 \input{rescalefonts}
@@ -209,28 +205,30 @@ Unlike $L^2$ projection, which requires solution of large linear system, \clm
 interpolant is constructed from local linear systems of size 1 assembled over
 patches surrounding mesh vertices.
 
-\begin{wraptable}{r}{0.48\textwidth}
-\begin{tabular}{l|ccc}
+\begin{wraptable}{r}{0.42\textwidth}
+\begin{flushright}
+\begin{tabular}{c|ccc}
 \hline
-\multirow{2}{*}{$n$} & \multicolumn{3}{c}{size}\\
+\multirow{2}{*}{CPUs} & \multicolumn{3}{c}{degrees of freedom}\\
 \cline{2-4}
    &       2101250 &       8396802 &      14612418\\
 \hline
-1  &  (0.99, 5.17) & (4.10, 20.93) & (7.46, 37.21)\\
-2  &  (0.66, 3.49) & (2.74, 14.04) & (3.95, 26.42)\\
-4  &  (0.68, 2.21) & (1.49, 10.80) & (2.03, 19.06)\\
-8  &  (0.33, 1.61) & (0.76, 8.46) & (1.82, 13.89)\\
-16 &  (0.18, 1.06) & (0.72, 7.46) & (1.65, 13.36)\\
+1  &  (1.0, 5.2) & (4.1, 21.0) & (7.5, 37.2)\\
+2  &  (0.7, 3.5) & (2.7, 14.0) & (4.0, 26.4)\\
+4  &  (0.7, 2.2) & (1.5, 10.8) & (2.0, 19.1)\\
+8  &  (0.3, 1.6) & (0.7,  8.5) & (1.8, 13.9)\\
+16 &  (0.2, 1.1) & (0.7,  7.5) & (1.7, 13.4)\\
 \hline
 \end{tabular}
+\end{flushright}
 \end{wraptable} 
 %------------------------------------------
 In fenicstools the mapping is realized more efficiently using a precomputed 
 averaging operator $A$ such that $Ab(u)=I_h u$. Due to this choice the setup cost
 of the interpolant is higher (4x) than that of $L^2$ projector. However, the 
 subsequent (repetitive) evaluation comes at a cost of a matrix-vector product.
-\textbf{$\triangleright$ Table}: CPU cost of action of \clm interpolator vs.
-$L^2$ projector. 
+\textbf{$\triangleright$ Table}: MPI.MAX-ed timings (in seconds) of action of 
+\clm interpolator and $L^2$ projector. 
 %
 \footnotesize
 \end{minipage}};

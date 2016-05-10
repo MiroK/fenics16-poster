@@ -1,4 +1,4 @@
-.PHONY: qrcode.pdf all clean
+.PHONY: all clean
 
 all: poster.pdf
 
@@ -28,6 +28,9 @@ rate_plot.pdf: rate_plot.tex rate_data.txt
 
 poster.pdf: poster.tex qrfenicstools.pdf domains.pdf plot_Ih.pdf plot_Ih_clement.pdf rate_plot.pdf
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
+
+view: 
+	evince poster.pdf &
 
 clean:
 	latexmk -C
