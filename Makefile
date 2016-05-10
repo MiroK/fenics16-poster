@@ -37,7 +37,7 @@ rate_plot.pdf: rate_plot.tex rate_data.txt
 poster.pdf: poster.tex qrfenicstools.pdf qrposter.pdf qrextras.pdf domains.pdf plot_Ih.pdf plot_Ih_clement.pdf rate_plot.pdf
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
 
-extras.pdf: extras.tex
+extras: extras.tex
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S" $<
 
 view: 

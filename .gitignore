@@ -10,3 +10,9 @@ graphics/plot*.pdf
 graphics/domains*.pdf
 graphics/rate_plot.pdf
 graphics/qr*.pdf
+
+*.bbl
+*.bcf
+*.blg
+*.xml
+
