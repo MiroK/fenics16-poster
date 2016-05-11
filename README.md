@@ -4,4 +4,6 @@ they are the colors of a rather famous [PDE book](https://books.google.no/books?
 Though appropriate, I did not choose these colors because FEniCS solves PDEs.
 Rather, the book really stands out from the crowd on my shelf.
 
-![shelf](https://github.com/MiroK/fenics16-poster/tree/master/graphics/shelf.png)
+<p align="center">
+  <img src="https://github.com/MiroK/fenics16-poster/blob/master/graphics/shelf.png" alt="Shelf"/>
+</p>
